@@ -3,7 +3,14 @@ import cors from "cors";
 import fetch from "node-fetch";
 
 const app = express();
-app.use(cors());
+const corsOptions = {
+  origin: "https://front-test-omega-sage.vercel.app",
+  methods: ["POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions));
 app.use(express.json());
 
 const TOGETHER_API_URL = "https://api.together.xyz/v1/chat/completions";
